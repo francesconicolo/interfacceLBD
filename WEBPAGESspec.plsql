@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE "FNICOLO".WebPages as
+CREATE OR REPLACE PACKAGE WebPages as
 
 procedure BodyHome (idSessione varchar2 default 0);
 procedure MuseiHome (idSessione int default 0);

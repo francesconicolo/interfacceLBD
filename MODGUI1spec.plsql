@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE "FNICOLO".modGUI1 as
+CREATE OR REPLACE PACKAGE modGUI1 as
 
 procedure ApriPagina(titolo varchar2 default 'Senza titolo', idSessione int default 0);
 procedure Header (idSessione int default 0);

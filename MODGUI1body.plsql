@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE BODY "FNICOLO".modGUI1 as
+CREATE OR REPLACE PACKAGE BODY modGUI1 as
 
     procedure ApriPagina(titolo varchar2 default 'Senza titolo', idSessione int default 0) is
     begin
