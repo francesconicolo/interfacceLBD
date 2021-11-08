@@ -155,5 +155,40 @@ CREATE OR REPLACE PACKAGE BODY "FNICOLO".modGUI1 as
         htp.prn('<input type="time" id="'|| id ||'" name="'|| nome ||'" min="09:00" max="18:00" required>');
     end InputTime;
 
+    --Corveddu
+    procedure ButtonRadio(text varchar2 default 'Radio') is
+    begin
+        htp.print(<input type="radio"> ||text|| </input>);
+    end ButtonRadio;
+
+    procedure ButtonCheckbox(text varchar2 default 'Check Box') is
+    begin
+        htp.print(<input type="checkbox">||text||</input>);
+    end ButtonCheckbox;
+
+    procedure ResetFields(text varchar2 default 'Reset') is
+    begin 
+        htp.print(<input type="reset">||text||</input>);
+    end ResetFields;
+
+    procedure TextEmail is
+    begin
+        htp.print(<input type="email"> </input>);
+    end TextEmail;
+
+    procedure OpenSelect(idSel varchar2 default '', nameSel varchar2 default '') is
+    begin
+        htp.print(<select id="||idSel||" name="||nameSel||">);
+    end OpenSelect;
+
+    procedure Opzioni(value varchar2 default '',text varchar2 default 'opzione') is
+    begin
+        htp.print(<option value="||value||"> ||text|| </option>);
+    end Opzioni;
+
+    procedure CloseSelect is
+    begin
+        htp.print(</select>);
+    end CloseSelect;
 
 end modGUI1;
