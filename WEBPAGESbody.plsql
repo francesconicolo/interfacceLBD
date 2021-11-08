@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE BODY "FNICOLO".WebPages as
+CREATE OR REPLACE PACKAGE BODY WebPages as
 
 procedure BodyHome (idSessione varchar2 default 0) is
     begin
