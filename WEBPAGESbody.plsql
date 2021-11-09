@@ -1,11 +1,8 @@
 CREATE OR REPLACE PACKAGE BODY WebPages as
 
-procedure BodyHome (idSessione varchar2 default 0) is
+procedure Home (idSessione varchar2 default 0) is
     begin
-    htp.htmlOpen;
-    htp.headOpen;
-    htp.prn('<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> ');
-    htp.headClose;
+    modGUI1.ApriPagina('HOME',idSessione);
     modGUI1.Header(idSessione);
     if (idSessione=1)
     then
@@ -34,14 +31,16 @@ procedure BodyHome (idSessione varchar2 default 0) is
             modGUI1.ChiudiDiv;
         modGUI1.chiudiDiv;
     end if;
-    end BodyHome;
+    end Home;
 
     procedure MuseiHome (idSessione int default 0) is
     begin
-        htp.prn('<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> ');
+        modGUI1.ApriPagina('Musei',idSessione);
         modGUI1.Header(idSessione);
-
-        htp.br;htp.br;htp.br;htp.br;htp.br;htp.br;
+        htp.br;
+        htp.br;
+        htp.br;
+        htp.br;
         modGUI1.ApriDiv('class="w3-center"');
             htp.prn('<h1>Musei</h1>');
         modGUI1.ChiudiDiv;
@@ -75,7 +74,7 @@ procedure BodyHome (idSessione varchar2 default 0) is
             FOR k IN 1..10 LOOP
                 modGUI1.ApriDiv('class="w3-col l4 w3-padding-large w3-center"');
                     modGUI1.ApriDiv('class="w3-card-4"');
-                    htp.prn('<img src="https://cdn.pixabay.com/photo/2016/10/22/15/32/water-1761027__480.jpg" alt="Alps" style="width:100%">');
+                    htp.prn('<img src="https://cdn.pixabay.com/photo/2016/10/22/15/32/water-1761027__480.jpg" alt="Alps" style="width:100%;">');
                             modGUI1.ApriDiv('class="w3-container w3-center"');
                                 htp.prn('<p>Museo '|| k ||'</p>');
                             modGUI1.ChiudiDiv;
@@ -94,10 +93,12 @@ procedure BodyHome (idSessione varchar2 default 0) is
 
     procedure CampiEstiviHome (idSessione int default 0) is
     begin
-        htp.prn('<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> ');
+        modGUI1.ApriPagina('Campi Estivi',idSessione);
         modGUI1.Header(idSessione);
-
-        htp.br;htp.br;htp.br;htp.br;htp.br;htp.br;
+        htp.br;
+        htp.br;
+        htp.br;
+        htp.br;
         modGUI1.ApriDiv('class="w3-center"');
             htp.prn('<h1>Campi estivi</h1>');
         modGUI1.ChiudiDiv;
@@ -157,5 +158,16 @@ procedure BodyHome (idSessione varchar2 default 0) is
             END LOOP;
         modGUI1.chiudiDiv;
     end CampiEstiviHome;
+
+    procedure Test (idSessione int default 0) is
+    begin
+        modGUI1.ApriPagina('Test',idSessione);
+        modGUI1.Header(idSessione);
+        htp.br;
+        htp.br;
+        htp.br;
+        htp.br;
+        
+    end Test;
 
 end WebPages;

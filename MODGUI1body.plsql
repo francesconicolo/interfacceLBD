@@ -14,9 +14,12 @@ CREATE OR REPLACE PACKAGE BODY modGUI1 as
     modGUI1.ApriDiv('class="w3-dropdown w3-bar w3-top w3-black w3-large"');
         htp.prn('<button onclick="myFunction()" class="w3-button w3-hover-white w3-black w3-xxxlarge">☰</button>');
         modGUI1.ApriDiv('id="Demo" class="w3-dropdown-content w3-bar-block w3-black w3-sidebar" style="width:20%"');
-            modGUI1.Collegamento('HOME','ApriPagina?idSessione='|| idSessione,'w3-bar-item w3-button');
-            modGUI1.Collegamento('Link 2','Link1','w3-bar-item w3-button');
-            modGUI1.Collegamento('Link 3','Link1','w3-bar-item w3-button');
+            modGUI1.Collegamento('HOME','Home?idSessione='|| idSessione,'w3-bar-item w3-button');
+            if (idSessione!=0)
+            then
+            modGUI1.Collegamento('Musei','MuseiHome?idSessione='|| idSessione,'w3-bar-item w3-button');
+            modGUI1.Collegamento('Campi Estivi','CampiEstiviHome?idSessione='|| idSessione,'w3-bar-item w3-button');
+            end if;
         modGUI1.ChiudiDiv;
         modGUI1.BannerUtente(idSessione);
     modGUI1.ChiudiDiv;
@@ -31,9 +34,8 @@ CREATE OR REPLACE PACKAGE BODY modGUI1 as
                 }
             }
         </script>
-    ');
+    ');   
     end Header;
-
 
     procedure BannerUtente (idSessione int default 0) is /*Banner Log-In o utente */
     begin
@@ -80,7 +82,7 @@ CREATE OR REPLACE PACKAGE BODY modGUI1 as
 
     procedure Bottone (colore varchar2, text varchar2 default 'myButton') is /*Bottone(colore,testo) - specificare colore in inglese - testo contenuto nel bottone*/
     begin
-        htp.prn ('<button class="w3-button w3-'|| colore ||' w3-margin">'||text||'</button>');
+        htp.prn ('<button class="w3-button '|| colore ||' w3-margin">'||text||'</button>');
     end Bottone;
 
     procedure ApriDiv (attributi varchar2 default '') is /*attributi -> parametri stile*/
@@ -155,40 +157,49 @@ CREATE OR REPLACE PACKAGE BODY modGUI1 as
         htp.prn('<input type="time" id="'|| id ||'" name="'|| nome ||'" min="09:00" max="18:00" required>');
     end InputTime;
 
-    --Corveddu
-    procedure ButtonRadio(text varchar2 default 'Radio') is
+    procedure SelectOpen(nome varchar2 default 'mySelect') is
     begin
-        htp.print(<input type="radio"> ||text|| </input>);
-    end ButtonRadio;
+        htp.prn('<select class="w3-select w3-border w3-round" style="max-width:150px;" name="'|| nome ||'">');
+    end SelectOpen;
 
-    procedure ButtonCheckbox(text varchar2 default 'Check Box') is
+    procedure SelectOption(valore int, testo varchar2 default 'Opzione') is
     begin
-        htp.print(<input type="checkbox">||text||</input>);
-    end ButtonCheckbox;
+        htp.prn('<option value="' ||valore|| '">'|| testo ||'</option>');
+    end SelectOption;
 
-    procedure ResetFields(text varchar2 default 'Reset') is
-    begin 
-        htp.print(<input type="reset">||text||</input>);
-    end ResetFields;
-
-    procedure TextEmail is
+    procedure SelectClose is
     begin
-        htp.print(<input type="email"> </input>);
-    end TextEmail;
+        htp.prn('</select>');
+    end SelectClose;
+    
+    procedure InputRadioButton (testo varchar2, nome varchar2, valore varchar2, checked int default 0, disabled int default 0) is
+    begin    
+        htp.print('<input class="w3-radio" type="radio" name="'|| nome ||'" value="'|| valore ||'"');
+        if (checked=1)
+        then
+            htp.prn(' checked');
+        end if;
+        if (disabled=1)
+        then 
+            htp.prn(' disabled');
+        end if;
+        htp.prn('>');
+        htp.prn(testo);
+    end InputRadioButton;
 
-    procedure OpenSelect(idSel varchar2 default '', nameSel varchar2 default '') is
-    begin
-        htp.print(<select id="||idSel||" name="||nameSel||">);
-    end OpenSelect;
-
-    procedure Opzioni(value varchar2 default '',text varchar2 default 'opzione') is
-    begin
-        htp.print(<option value="||value||"> ||text|| </option>);
-    end Opzioni;
-
-    procedure CloseSelect is
-    begin
-        htp.print(</select>);
-    end CloseSelect;
+    procedure InputCheckbox (testo varchar2, nome varchar2, checked int default 0, disabled int default 0) is
+    begin    
+        htp.print('<input class="w3-check" type="checkbox" name="'|| nome ||'"');
+        if (checked=1)
+        then
+            htp.prn(' checked');
+        end if;
+        if (disabled=1)
+        then 
+            htp.prn(' disabled');
+        end if;
+        htp.prn('>');
+        htp.prn(testo);
+    end InputCheckbox;
 
 end modGUI1;
